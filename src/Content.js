@@ -3,13 +3,13 @@ import './App.css';
 
 export default class Content extends Component {
   render() {
-    const { tabs, index} = this.props
-    if (tabs.length > 0) {
-      console.log(tabs[index])
-      console.log(index)
-    }
-    return(
-      tabs.length > 0 ? tabs[index].id : <div/>
-    )
+    let { tabs, index } = this.props
+    return tabs.map((Tab, i) => (
+    	<div className={ `tab-wrapper ${
+    		i === index ? 'active' : ''
+    	}`}>
+    		<Tab/>
+    	</div>
+    ))
   }
 }

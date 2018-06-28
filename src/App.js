@@ -6,40 +6,31 @@ import Page2 from './Page2'
 import './App.css';
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      tabs: [],
-      index: null
-    }
-    this.changeFuckingPage = this.changeFuckingPage.bind(this);
+  
+  state = { 
+    tabs: [],
+    index: 0
   }
 
-  addFuckingPage(Component) {
-    console.log(Component)
-    let index = 0
-    if (this.state.index) {
-      index = this.state.index + 1
-    }
-    this.setState((prevState) => {
-      return {
-        tabs: prevState.tabs.concat({id: <Component/>}),
-        index: index
-      }
-    })
+  addFuckingPage(component) {
+    this.setState(prevState => ({
+      tabs: [...prevState.tabs, component],
+      index: prevState.tabs.length
+    }))
   }
 
   changeFuckingPage(index) {
-    this.setState({index})
+    console.log(index)
+    this.setState({ index })
   }
 
   render() {
     const { tabs, index } = this.state
     return (
       <div className="App">
-        <Header tabs={tabs} changeFuckingPage={this.changeFuckingPage} />
-        <button onClick={() => this.addFuckingPage(Page1)}> Page1 </button>
-        <button onClick={() => this.addFuckingPage(Page2)}> Page2 </button>
+        <Header tabs={tabs} changeFuckingPage={ index => this.changeFuckingPage(index) } />
+        <button onClick={ () => this.addFuckingPage(Page1) }> Page1 </button>
+        <button onClick={ () => this.addFuckingPage(Page2) }> Page2 </button>
         <Content tabs={tabs} index={index} />
       </div>
     );
