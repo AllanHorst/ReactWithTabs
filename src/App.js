@@ -13,6 +13,11 @@ class App extends Component {
   }
 
   addFuckingPage(component) {
+    if(this.state.tabs.includes(component)) {
+      this.changeFuckingPage(this.state.tabs.indexOf(component))
+      return
+    }
+
     this.setState(prevState => ({
       tabs: [...prevState.tabs, component],
       index: prevState.tabs.length
